@@ -92,6 +92,7 @@ export function Login() {
                     <ErrorMessage>{errors.password?.message}</ErrorMessage>
 
                     <Button
+                        autoComplete="current-password"
                         type="submit"
                         style={{ marginTop: 50, marginBottom: 20 }}
                     >

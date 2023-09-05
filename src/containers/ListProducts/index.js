@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import { useHistory } from 'react-router-dom'
 
 import CancelTwoToneIcon from '@mui/icons-material/CancelTwoTone'
 import CheckCircleTwoToneIcon from '@mui/icons-material/CheckCircleTwoTone'
@@ -10,12 +11,14 @@ import TableContainer from '@mui/material/TableContainer'
 import TableHead from '@mui/material/TableHead'
 import TableRow from '@mui/material/TableRow'
 
+import paths from '../../constants/paths'
 import api from '../../services/api'
 import formatCurrency from '../../utils/formatCurrency'
 import { Container, Img, EditIconStyle } from './styles'
 
 function ListProducts() {
     const [products, setProducts] = useState([])
+    const { push } = useHistory()
 
     const isOffer = offerStatus => {
         if (offerStatus) {
@@ -45,6 +48,10 @@ function ListProducts() {
         }
         loadProducts()
     }, [])
+
+    function editProduct(product) {
+        push(paths.EditProduct, { product })
+    }
 
     return (
         <Container>
@@ -85,7 +92,9 @@ function ListProducts() {
                                         <Img src={product.url} />
                                     </TableCell>
                                     <TableCell align="center">
-                                        <EditIconStyle />
+                                        <EditIconStyle
+                                            onClick={() => editProduct(product)}
+                                        />
                                     </TableCell>
                                 </TableRow>
                             ))}

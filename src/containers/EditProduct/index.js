@@ -20,22 +20,20 @@ import {
     ContainerOffer
 } from './styles'
 
-function NewProduct() {
+function EditProduct() {
     const [categories, setCategories] = useState([])
     const [fileName, setFileName] = useState(null)
-    const { push } = useHistory()
+    const {
+        push,
+        location: {
+            state: { product }
+        }
+    } = useHistory()
 
     const schema = Yup.object().shape({
         name: Yup.string().required('Este campo é obrigatório'),
         price: Yup.string().required('Este campo é obrigatório'),
         category: Yup.object().required('Este campo é obrigatório'),
-        file: Yup.mixed()
-            .test('required', 'Carregue uma imagem', value => {
-                return value?.length > 0
-            })
-            .test('fileSize', 'Carregue uma imagem de até 2mb', value => {
-                return value[0]?.size <= 2000000
-            }),
         offer: Yup.boolean()
     })
 
@@ -56,11 +54,14 @@ function NewProduct() {
         productDataFormData.append('category_id', data.category.id)
         productDataFormData.append('offer', data.offer)
 
-        await toast.promise(api.post('products', productDataFormData), {
-            pending: 'Adicionando novo produto...',
-            success: 'Produto adicionado com sucesso!!!',
-            error: 'Falha ao aidiconar produto. Tente novamente!'
-        })
+        await toast.promise(
+            api.put(`products/${product.id}`, productDataFormData),
+            {
+                pending: 'Atualizando informações do produto...',
+                success: 'Produto atualizado com sucesso!!!',
+                error: 'Falha ao atualizar produto. Tente novamente!'
+            }
+        )
 
         setTimeout(() => {
             push(paths.Products)
@@ -81,13 +82,21 @@ function NewProduct() {
             <form id="form" noValidate onSubmit={handleSubmit(onSubmit)}>
                 <div>
                     <Label>Nome</Label>
-                    <Input type="text" {...register('name')} />
+                    <Input
+                        type="text"
+                        {...register('name')}
+                        defaultValue={product.name}
+                    />
                     <ErrorMessage>{errors.name?.message}</ErrorMessage>
                 </div>
 
                 <div>
                     <Label>Preço</Label>
-                    <Input type="number" {...register('price')} />
+                    <Input
+                        type="number"
+                        {...register('price')}
+                        defaultValue={product.price}
+                    />
                     <ErrorMessage>{errors.price?.message}</ErrorMessage>
                 </div>
 
@@ -115,6 +124,7 @@ function NewProduct() {
 
                 <div>
                     <Controller
+                        defaultValue={product.category}
                         name="category"
                         control={control}
                         render={({ field }) => {
@@ -125,6 +135,7 @@ function NewProduct() {
                                     getOptionLabel={cat => cat.name}
                                     getOptionValue={cat => cat.id}
                                     placeholder="...Selecione a categoria"
+                                    defaultValue={product.category}
                                 />
                             )
                         }}
@@ -133,13 +144,17 @@ function NewProduct() {
                 </div>
                 <ContainerOffer>
                     <Label>Produto em oferta:</Label>
-                    <input type="checkbox" {...register('offer')} />
+                    <input
+                        type="checkbox"
+                        {...register('offer')}
+                        defaultChecked={product.offer}
+                    />
                 </ContainerOffer>
 
-                <ButtonStyle>Adicionar</ButtonStyle>
+                <ButtonStyle>Atualizar</ButtonStyle>
             </form>
         </Container>
     )
 }
 
-export default NewProduct
+export default EditProduct

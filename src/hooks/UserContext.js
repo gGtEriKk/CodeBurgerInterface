@@ -8,19 +8,16 @@ export const UserProvider = ({ children }) => {
     const [userData, setUserData] = useState({})
 
     const putUserdata = async userInfo => {
-        await localStorage.setItem(
-            'codeburger:userData',
-            JSON.stringify(userInfo)
-        )
+        localStorage.setItem('codeburger:userData', JSON.stringify(userInfo))
     }
 
     const logout = async () => {
-        await localStorage.removeItem('codeburger:userData')
+        localStorage.removeItem('codeburger:userData')
     }
 
     useEffect(() => {
         const loadUserData = async () => {
-            const clientInfo = await localStorage.getItem('codeburger:userData')
+            const clientInfo = localStorage.getItem('codeburger:userData')
             if (clientInfo) {
                 setUserData(JSON.parse(clientInfo))
             }
@@ -30,7 +27,7 @@ export const UserProvider = ({ children }) => {
 
     return (
         <UserContext.Provider value={{ putUserdata, userData, logout }}>
-            ({children})
+            {children}
         </UserContext.Provider>
     )
 }

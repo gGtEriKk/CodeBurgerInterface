@@ -37,3 +37,9 @@ export const LinkMenu = styled.a`
         props.isactivestatus ? '2px solid #9758A6;' : 'none'};
     padding-bottom: 5px;
 `
+
+export const DeleteOrderButton = styled.button`
+    border: none;
+    background: none;
+    cursor: pointer;
+`

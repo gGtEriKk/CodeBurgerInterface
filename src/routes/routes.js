@@ -16,6 +16,8 @@ const Routes = () => (
             <PrivateRoutes isAdmin component={Admin} path={paths.Order} />
             <PrivateRoutes isAdmin component={Admin} path={paths.Products} />
             <PrivateRoutes isAdmin component={Admin} path={paths.NewProduct} />
+            <PrivateRoutes isAdmin component={Admin} path={paths.NewCategory} />
+            <PrivateRoutes isAdmin component={Admin} path={paths.EditProduct} />
         </Switch>
     </Router>
 )

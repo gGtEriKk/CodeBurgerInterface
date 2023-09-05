@@ -94,6 +94,7 @@ const Orders = () => {
                             <TableCell>Cliente</TableCell>
                             <TableCell>Data</TableCell>
                             <TableCell>Status do pedido</TableCell>
+                            <TableCell>Deletar</TableCell>
                         </TableRow>
                     </TableHead>
                     <TableBody>

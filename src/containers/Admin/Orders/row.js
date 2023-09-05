@@ -1,5 +1,6 @@
 import React from 'react'
 
+import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined'
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown'
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp'
 import Box from '@mui/material/Box'
@@ -15,7 +16,7 @@ import PropTypes from 'prop-types'
 
 import api from '../../../services/api'
 import status from './order-status'
-import { ProductImg, ReactSelectStyle } from './styles'
+import { ProductImg, ReactSelectStyle, DeleteOrderButton } from './styles'
 
 function Row({ row, orders, setOrders }) {
     const [open, setOpen] = React.useState(false)
@@ -36,6 +37,12 @@ function Row({ row, orders, setOrders }) {
         } finally {
             setIsLoading(false)
         }
+    }
+
+    const deleteOrder = async id => {
+        await api.delete(`orders/${id}`)
+
+        setOrders(orders.filter(order => order._id !== id))
     }
 
     return (
@@ -84,6 +91,16 @@ function Row({ row, orders, setOrders }) {
                             isLoading={isLoading}
                         />
                     }
+                </TableCell>
+                <TableCell>
+                    <DeleteOrderButton
+                        type="button"
+                        onClick={() => deleteOrder(row.orderId)}
+                    >
+                        <DeleteOutlineOutlinedIcon
+                            style={{ color: '#ffffff' }}
+                        />
+                    </DeleteOrderButton>
                 </TableCell>
             </TableRow>
             <TableRow>

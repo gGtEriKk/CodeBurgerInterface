@@ -35,7 +35,7 @@ export function Header() {
                 </PageLink>
                 <PageLink
                     onClick={() => push('/produtos')}
-                    $isactive={pathname.includes('produtos')}
+                    isactive={pathname.includes('produtos')}
                 >
                     Ver produtos
                 </PageLink>
@@ -54,7 +54,8 @@ export function Header() {
 
                 <UserNameAndLogoutLink>
                     <UserName>
-                        <p>Olá, </p> {userData.name}
+                        <p>Olá </p>
+                        {userData.name}
                     </UserName>
                     <LogoutLink onClick={() => logoutUser()}>Sair</LogoutLink>
                 </UserNameAndLogoutLink>

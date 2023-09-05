@@ -1,5 +1,7 @@
 import styled from 'styled-components'
 
+import { Button } from '../Button'
+
 export const Container = styled.div`
     display: flex;
     flex-direction: column;
@@ -53,4 +55,9 @@ export const Container = styled.div`
         font-weight: 300;
         color: #222222;
     }
+`
+
+export const OrderButton = styled(Button)`
+    background-color: ${props => (!props.disabled ? '#9758a6;' : '#555555;')};
+    color: ${props => (!props.disabled ? '#ffffff;' : '#000000;')};
 `

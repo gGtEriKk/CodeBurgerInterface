@@ -89,7 +89,7 @@ export const CartProvider = ({ children }) => {
                 decreaseProduct
             }}
         >
-            ({children})
+            {children}
         </CartContext.Provider>
     )
 }

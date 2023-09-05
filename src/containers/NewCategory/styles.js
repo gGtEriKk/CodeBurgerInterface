@@ -1,5 +1,3 @@
-import ReactSelect from 'react-select'
-
 import styled from 'styled-components'
 
 import { Button } from '../../components/Button'
@@ -40,8 +38,6 @@ export const Input = styled.input`
     box-shadow: 0px 4px 14px 0px #0000001a;
 `
 
-export const ReactSelectStyle = styled(ReactSelect)``
-
 export const ButtonStyle = styled(Button)`
     width: 100%;
     margin-top: 50px;
@@ -60,11 +56,4 @@ export const LabelUpload = styled.label`
         opacity: 0;
         width: 1px;
     }
-`
-
-export const ContainerOffer = styled.div`
-    display: flex;
-    align-items: center;
-    gap: 15px;
-    cursor: pointer;
 `

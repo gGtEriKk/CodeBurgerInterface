@@ -1,4 +1,5 @@
 import AddOutlinedIcon from '@mui/icons-material/AddOutlined'
+import CategoryOutlinedIcon from '@mui/icons-material/CategoryOutlined'
 import ShoppingBagOutlinedIcon from '@mui/icons-material/ShoppingBagOutlined'
 import StorefrontOutlinedIcon from '@mui/icons-material/StorefrontOutlined'
 
@@ -22,6 +23,12 @@ const listLinks = [
         label: 'Adicionar produto',
         link: paths.NewProduct,
         icon: AddOutlinedIcon
+    },
+    {
+        id: 4,
+        label: 'Adicionar categoria',
+        link: paths.NewCategory,
+        icon: CategoryOutlinedIcon
     }
 ]
 

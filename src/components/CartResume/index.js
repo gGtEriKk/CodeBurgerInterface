@@ -4,8 +4,7 @@ import { toast } from 'react-toastify'
 import { useCart } from '../../hooks/CartContext'
 import api from '../../services/api'
 import formatCurrency from '../../utils/formatCurrency'
-import { Button } from '../Button'
-import { Container } from './styles'
+import { Container, OrderButton } from './styles'
 
 export function CartResume() {
     const [finalPrice, setFinalPrice] = useState(0)
@@ -32,6 +31,8 @@ export function CartResume() {
             success: 'Pedido realizado!',
             error: 'Falha ao realizar pedido. Tente novamente.'
         })
+
+        localStorage.removeItem('codeburger:cartInfo')
     }
 
     return (
@@ -51,12 +52,13 @@ export function CartResume() {
                     <p>{formatCurrency(finalPrice + deliveryTax)}</p>
                 </div>
             </Container>
-            <Button
+            <OrderButton
+                disabled={cartProducts.length === 0}
                 onClick={() => submitOrder()}
                 style={{ width: '100%', marginTop: '20px' }}
             >
                 Finalizar pedido
-            </Button>
+            </OrderButton>
         </div>
     )
 }
